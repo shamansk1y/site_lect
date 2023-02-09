@@ -22,8 +22,8 @@ class DishAllAdmin(admin.ModelAdmin):
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
     model = Team
-    list_editable = ['position', 'is_visible']
-    list_display = ['name_staff', 'position', 'is_visible']
+    list_editable = ['name_staff', 'position', 'is_visible', 'profession', 'staff_photo']
+    list_display = ['name_staff', 'position', 'is_visible', 'profession', 'staff_photo']
     list_display_links = None
 
 @admin.register(Galery)
