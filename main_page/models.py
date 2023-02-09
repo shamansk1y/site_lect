@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 import os
 import uuid
 
@@ -104,7 +105,7 @@ class Booking(models.Model):
     class Meta:
         ordering = ('book_num', 'date')
         verbose_name = 'Book'
-        verbose_name_plural = 'Бронювання'
+        verbose_name_plural = 'Тест Бронювання'
 
 class Events(models.Model):
 
@@ -147,3 +148,32 @@ class About(models.Model):
 
     class Meta:
         verbose_name_plural = 'Про нас'
+
+
+class Reservation(models.Model):
+    phone_validator = RegexValidator(regex=r'', message='')
+
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=20, validators=[phone_validator])
+    persons = models.SmallIntegerField()
+    message = models.TextField(max_length=250, blank=True)
+
+    date = models.DateField(auto_now_add=True )
+    date_processing = models.DateField(auto_now=True )
+    is_processed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-date',)
+        verbose_name_plural = 'Бронювання'
+
+class WhyUs(models.Model):
+    name = models.CharField(max_length=50, unique=True, db_index=True)
+    position = models.SmallIntegerField(unique=True)
+    is_visible = models.BooleanField(default=True)
+    desc = models.TextField(max_length=255)
+
+    class Meta:
+        ordering = ('position',)
+        verbose_name_plural = 'Чому нас'
+
+
