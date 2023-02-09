@@ -151,7 +151,7 @@ class About(models.Model):
 
 
 class Reservation(models.Model):
-    phone_validator = RegexValidator(regex=r'', message='')
+    phone_validator = RegexValidator(regex=r'^(\d{3}[- .]?){2}\d{4}$', message='Input phone № in format xxx xxx xxxx')
 
     name = models.CharField(max_length=50)
     phone = models.CharField(max_length=20, validators=[phone_validator])
