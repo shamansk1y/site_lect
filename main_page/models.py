@@ -80,7 +80,7 @@ class Galery(models.Model):
 
     class Meta:
         ordering = ('position',)
-        verbose_name_plural = 'Galery'
+        verbose_name_plural = 'Gallery'
 
 class Booking(models.Model):
 
