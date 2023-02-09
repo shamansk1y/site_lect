@@ -23,14 +23,14 @@ class DishAllAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     model = Team
     list_editable = ['position', 'is_visible']
-    list_display = ['position', 'is_visible']
+    list_display = ['name_staff', 'position', 'is_visible']
     list_display_links = None
 
 @admin.register(Galery)
 class GaleryAdmin(admin.ModelAdmin):
     model = Galery
     list_editable = ['position', 'is_visible']
-    list_display = ['position', 'is_visible']
+    list_display = ['title', 'position', 'is_visible']
     list_display_links = None
     list_filter = ['position']
 

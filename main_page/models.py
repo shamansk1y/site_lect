@@ -12,6 +12,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ('position',)
+        verbose_name_plural = 'Категорії'
+        verbose_name = 'Категорія'
 
     def __iter__(self):
         for item in self.dishes.all():
@@ -39,6 +41,8 @@ class Dish(models.Model):
 
     class Meta:
         ordering = ('category', 'position')
+        verbose_name = 'Страва'
+        verbose_name_plural = 'Страви'
 
 class Team(models.Model):
 
@@ -62,6 +66,7 @@ class Team(models.Model):
 
     class Meta:
         ordering = ('position',)
+        verbose_name_plural = 'Наша команда'
 
 class Galery(models.Model):
 
@@ -80,7 +85,7 @@ class Galery(models.Model):
 
     class Meta:
         ordering = ('position',)
-        verbose_name_plural = 'Gallery'
+        verbose_name_plural = 'Галерея'
 
 class Booking(models.Model):
 
@@ -99,7 +104,7 @@ class Booking(models.Model):
     class Meta:
         ordering = ('book_num', 'date')
         verbose_name = 'Book'
-        verbose_name_plural = 'Booking'
+        verbose_name_plural = 'Бронювання'
 
 class Events(models.Model):
 
@@ -122,7 +127,7 @@ class Events(models.Model):
     class Meta:
         ordering = ('position', 'price')
         verbose_name = 'Event'
-        verbose_name_plural = 'Events'
+        verbose_name_plural = 'Заходи'
 
 class About(models.Model):
 
@@ -141,4 +146,4 @@ class About(models.Model):
         return f'{self.h_1}'
 
     class Meta:
-        verbose_name_plural = 'About us'
+        verbose_name_plural = 'Про нас'
