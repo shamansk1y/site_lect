@@ -151,7 +151,7 @@ class About(models.Model):
 
 
 class Reservation(models.Model):
-    phone_validator = RegexValidator(regex=r'^(\d{3}[- .]?){2}\d{4}$', message='Input phone № in format xxx xxx xxxx')
+    phone_validator = RegexValidator(regex=r'^\+?3?8?0\d{2}[- ]?(\d[ -]?){7}$', message='Error phone number')
 
     name = models.CharField(max_length=50)
     phone = models.CharField(max_length=20, validators=[phone_validator])
@@ -161,6 +161,9 @@ class Reservation(models.Model):
     date = models.DateField(auto_now_add=True )
     date_processing = models.DateField(auto_now=True )
     is_processed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.name}: {self.phone}'
 
     class Meta:
         ordering = ('-date',)

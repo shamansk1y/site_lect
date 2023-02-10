@@ -1,16 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Category, Dish, Galery, Team, WhyUs
 from .forms import ReservationForm
 
 def main(request):
+    if request.method == 'POST':
+        form_reserve = ReservationForm(request.POST)
+        if form_reserve.is_valid():
+            form_reserve.save()
+            return redirect('/')
     categories = Category.objects.filter(is_visible=True)
     dishes = Dish.objects.filter(is_visible=True, is_special=False)
     special_dishes = Dish.objects.filter(is_visible=True, is_special=True)
     gallery = Galery.objects.all()[:8]
     chefs = Team.objects.filter(is_visible=True)
     why_us = WhyUs.objects.all()[:3]
-
     form_reserve = ReservationForm()
+
 
     return render(request, 'main_page.html', context={
         'categories': categories,

@@ -3,6 +3,39 @@ from .models import Reservation
 
 
 class ReservationForm(forms.ModelForm):
+    name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
+        'type': 'text',
+        'name': 'name',
+        'class': 'form-control',
+        'id': 'name',
+        'placeholder': "Ваше ім'я",
+        'data-rule': 'minlen:4',
+        'data-msg': 'Please enter at least 4 chars'
+    }))
+    phone = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
+        'type': 'text',
+        'class': 'form-control',
+        'name': 'phone',
+        'id': 'phone',
+        'placeholder': 'Ваш телефон',
+        'data-rule': 'minlen:4',
+        'data-msg': 'Please enter at least 4 chars'
+    }))
+    persons = forms.IntegerField(widget=forms.NumberInput(attrs={
+        'type': "number",
+        'class': "form-control",
+        'name': "people",
+        'id': "people",
+        'placeholder': "# кількість гостей",
+        'data-rule': "minlen:1",
+        'data-msg': "Please enter at least 1 chars"
+    }))
+    message = forms.CharField(max_length=250, widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'name': 'message',
+        'rows': '5',
+        'placeholder': 'Повідомлення'
+    }))
 
     class Meta:
         model = Reservation

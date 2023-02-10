@@ -56,6 +56,7 @@ class WhyUsAdmin(admin.ModelAdmin):
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
     model = Reservation
-    list_display = ['name', 'phone', 'persons', 'message', 'date']
+    list_display = ['name', 'phone', 'persons', 'message', 'date', 'is_processed']
+    list_editable = ['is_processed']
     list_display_links = None
     list_filter = ['date']
