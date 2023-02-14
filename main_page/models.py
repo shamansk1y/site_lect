@@ -248,3 +248,22 @@ class Footer(models.Model):
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'Футер'
+
+
+class Testimonials(models.Model):
+
+    def get_file_name(self, file_name: str) -> str:
+        ext = file_name.strip().split('.')[-1]
+        new_file_name = f'{uuid.uuid4()}.{ext}'
+        return os.path.join('media/testimonials/', new_file_name)
+
+    photo = models.ImageField(upload_to=get_file_name)
+    name = models.CharField(max_length=50)
+    prof = models.CharField(max_length=50)
+    star = models.SmallIntegerField(blank=True)
+    text = models.TextField(max_length=250)
+    is_visible = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name_plural = 'Відгуки'
