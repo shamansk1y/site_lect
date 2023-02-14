@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Category, Dish, Galery, Team, WhyUs, Slider, ContactInfo, Footer, Testimonials
+from .models import Category, Dish, Galery, Team, WhyUs, Slider, ContactInfo, Footer, Testimonials, About, Events
 from .forms import ReservationForm, ContactUsForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -33,6 +33,8 @@ def main(request):
     contact_info = ContactInfo.objects.get()
     footer = Footer.objects.get()
     testimonials = Testimonials.objects.filter(is_visible=True)
+    about = About.objects.get()
+    events = Events.objects.filter(is_visible=True)
 
 
     return render(request, 'main_page.html', context={
@@ -48,4 +50,6 @@ def main(request):
         'contact_info': contact_info,
         'footer': footer,
         'testimonials': testimonials,
+        'about': about,
+        'events': events,
     })

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Category, Dish, Team, Galery, Booking, About, WhyUs, \
-    Reservation, Slider, ContactUs, ContactInfo, Footer, Testimonials
+    Reservation, Slider, ContactUs, ContactInfo, Footer, Testimonials, Events
 
 
 class DishAdmin(admin.TabularInline):
@@ -108,3 +108,11 @@ class TestimonialsAdmin(admin.ModelAdmin):
     list_display = ['photo', 'name', 'prof', 'star', 'text', 'is_visible']
     list_editable = ['photo', 'name', 'prof', 'star', 'text', 'is_visible']
     list_display_links = None
+
+@admin.register(Events)
+class EventsAdmin(admin.ModelAdmin):
+    model = Events
+    list_display = ['title', 'event_date', 'photo', 'position', 'is_visible', 'price', 'desc']
+    list_editable = ['title', 'event_date', 'photo', 'position', 'is_visible', 'price', 'desc']
+    list_display_links = None
+

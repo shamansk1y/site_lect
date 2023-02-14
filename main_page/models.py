@@ -126,7 +126,7 @@ class Events(models.Model):
         return f'{self.title}'
 
     class Meta:
-        ordering = ('position', 'price')
+        ordering = ('event_date', 'price')
         verbose_name = 'Event'
         verbose_name_plural = 'Заходи'
 
@@ -142,6 +142,7 @@ class About(models.Model):
     position = models.SmallIntegerField(unique=True)
     is_visible = models.BooleanField(default=True)
     desc = models.TextField(max_length=500)
+    url_video = models.URLField()
 
     def __str__(self):
         return f'{self.h_1}'
@@ -267,3 +268,5 @@ class Testimonials(models.Model):
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'Відгуки'
+
+
