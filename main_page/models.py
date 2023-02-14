@@ -180,3 +180,71 @@ class WhyUs(models.Model):
         verbose_name_plural = 'Чому нас'
 
 
+
+class Slider(models.Model):
+
+    def get_file_name(self, file_name: str) -> str:
+        ext = file_name.strip().split('.')[-1]
+        new_file_name = f'{uuid.uuid4()}.{ext}'
+        return os.path.join('media/slider/', new_file_name)
+
+
+    title = models.CharField(max_length=50)
+    position = models.SmallIntegerField(unique=True)
+    photo = models.ImageField(upload_to=get_file_name)
+    is_visible = models.BooleanField(default=True)
+    h_1 = models.CharField(max_length=250, blank=True)
+    desc = models.TextField(max_length=500, blank=True)
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        ordering = ('position',)
+        verbose_name_plural = 'Слайдер'
+
+
+class ContactUs(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    subject_mes = models.CharField(max_length=50)
+    message = models.TextField(max_length=250, blank=True)
+
+    date = models.DateField(auto_now_add=True )
+    date_processing = models.DateField(auto_now=True )
+    is_processed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.name}: {self.email}'
+
+    class Meta:
+        ordering = ('-date',)
+        verbose_name_plural = 'Повідомлення'
+
+class ContactInfo(models.Model):
+    location = models.CharField(max_length=50)
+    location_text = models.CharField(max_length=50)
+    open_hours = models.CharField(max_length=50)
+    open_hours_text = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    email_text = models.CharField(max_length=50)
+    phone = models.CharField(max_length=50)
+    phone_text = models.CharField(max_length=50)
+    desc = models.TextField(max_length=250)
+    h1 = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = 'Контактна інформація'
+
+class Footer(models.Model):
+    name = models.CharField(max_length=50)
+    desc = models.CharField(max_length=250)
+    twitter = models.CharField(max_length=250)
+    facebook = models.CharField(max_length=250)
+    instagram = models.CharField(max_length=250)
+    google_plus = models.CharField(max_length=250)
+    linkedin = models.CharField(max_length=250)
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name_plural = 'Футер'

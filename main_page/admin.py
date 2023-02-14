@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import Category, Dish, Team, Galery, Booking, About, WhyUs, Reservation
+from .models import Category, Dish, Team, Galery, Booking, About, WhyUs, \
+    Reservation, Slider, ContactUs, ContactInfo, Footer
+
 
 class DishAdmin(admin.TabularInline):
     model = Dish
     raw_id_fields = ['category']
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -12,12 +15,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
     inlines = [DishAdmin]
 
+
 @admin.register(Dish)
 class DishAllAdmin(admin.ModelAdmin):
     model = Dish
     list_display = ['title', 'position', 'is_visible', 'ingredients', 'desc', 'price', 'photo', 'category', 'is_special']
     list_filter = ['category', 'is_special', 'is_visible']
     list_editable = ['position', 'is_visible', 'price', 'is_special']
+
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
@@ -34,6 +39,7 @@ class GaleryAdmin(admin.ModelAdmin):
     list_display_links = None
     list_filter = ['position']
 
+
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
     model = Booking
@@ -41,6 +47,7 @@ class BookingAdmin(admin.ModelAdmin):
     list_editable = ['book_num', 'date', 'time', 'num_of_pers']
     list_display_links = None
     list_filter = ['date']
+
 
 @admin.register(About)
 class AboutAdmin(admin.ModelAdmin):
@@ -60,3 +67,38 @@ class ReservationAdmin(admin.ModelAdmin):
     list_editable = ['is_processed']
     list_display_links = None
     list_filter = ['date']
+
+
+@admin.register(Slider)
+class SliderAdmin(admin.ModelAdmin):
+    model = Reservation
+    list_display = ['title', 'position', 'photo', 'is_visible', 'h_1', 'desc']
+    list_editable = ['title', 'position', 'photo', 'is_visible', 'h_1', 'desc']
+    list_display_links = None
+    list_filter = ['position']
+
+
+@admin.register(ContactUs)
+class ContactUsAdmin(admin.ModelAdmin):
+    model = ContactUs
+    list_display = ['name', 'email', 'subject_mes', 'message', 'date', 'is_processed']
+    list_editable = ['is_processed']
+    list_display_links = None
+    list_filter = ['date']
+
+@admin.register(ContactInfo)
+class ContactInfoAdmin(admin.ModelAdmin):
+    model = ContactInfo
+    list_display = ['location', 'location_text', 'open_hours', 'open_hours_text', 'email', 'email_text', 'phone', 'phone_text']
+    list_editable = ['location', 'location_text', 'open_hours', 'open_hours_text', 'email', 'email_text', 'phone', 'phone_text']
+    list_display_links = None
+
+
+@admin.register(Footer)
+class FooterAdmin(admin.ModelAdmin):
+    model = Footer
+    list_display = ['name', 'desc', 'twitter', 'facebook', 'instagram', 'google_plus', 'linkedin']
+    list_editable = ['name', 'desc', 'twitter', 'facebook', 'instagram', 'google_plus', 'linkedin']
+    list_display_links = None
+
+

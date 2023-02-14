@@ -1,5 +1,5 @@
 from django import forms
-from .models import Reservation
+from .models import Reservation, ContactUs
 
 
 class ReservationForm(forms.ModelForm):
@@ -37,6 +37,44 @@ class ReservationForm(forms.ModelForm):
         'placeholder': 'Повідомлення'
     }))
 
+
+
     class Meta:
         model = Reservation
         fields = ['name', 'phone', 'persons', 'message']
+
+
+class ContactUsForm(forms.ModelForm):
+    name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
+    'type': "text",
+    'name': "name",
+    'class': "form-control",
+    'id': "name",
+    'placeholder': "Вкажіть ваше ім'я"
+    }))
+
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'type': "email",
+        'class': "form-control",
+        'name': "email",
+        'id': "email",
+        'placeholder': "Вкажіть вашу пошту"
+    }))
+
+    subject_mes = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
+        'type': "text",
+        'class': "form-control",
+        'name': "subject",
+        'id': "subject",
+        'placeholder': "Тема"
+    }))
+
+    message = forms.CharField(max_length=250, widget=forms.Textarea(attrs={
+        'class': "form-control",
+        'name': "message",
+        'rows': "5",
+        'placeholder': "Повідомлення"
+    }))
+    class Meta:
+        model = ContactUs
+        fields = ['name', 'email', 'subject_mes', 'message']
