@@ -35,6 +35,8 @@ def main(request):
     testimonials = Testimonials.objects.filter(is_visible=True)
     about = About.objects.get()
     events = Events.objects.filter(is_visible=True)
+    user_manager = request.user.groups.filter(name='manager').exists()
+    user_auth = request.user.is_authenticated
 
 
     return render(request, 'main_page.html', context={
@@ -52,4 +54,7 @@ def main(request):
         'testimonials': testimonials,
         'about': about,
         'events': events,
+        'user_manager': user_manager,
+        'user_auth': user_auth,
     })
+
