@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Category, Dish, Galery, Team, WhyUs, Slider, ContactInfo, Footer, Testimonials, About, Events
+from .models import Category, Dish, Galery, Team, WhyUs, Slider, ContactInfo, Footer, Testimonials, \
+    About, Events, Reservation
 from .forms import ReservationForm, ContactUsForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -8,8 +9,7 @@ def is_manager(user):
     return user.groups.filter(name='manager').exists()
 
 
-# @login_required(login_url='/login/')
-# @user_passes_test(is_manager)
+
 def main(request):
     if request.method == 'POST':
         form_reserve = ReservationForm(request.POST)
@@ -58,3 +58,15 @@ def main(request):
         'user_auth': user_auth,
     })
 
+@login_required(login_url='/login/')
+@user_passes_test(is_manager)
+def update_reservation(request, pk):
+    Reservation.objects.filter(pk=pk).update(is_processed=True)
+    return redirect('main_page:list_reservations')
+
+
+@login_required(login_url='/login/')
+@user_passes_test(is_manager)
+def list_reservation(request):
+    messages = Reservation.objects.filter(is_processed=False)
+    return render(request, 'reservations.html', context={'reservations': messages})

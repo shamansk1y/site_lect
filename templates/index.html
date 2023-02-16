@@ -60,7 +60,7 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="/#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#/about">About</a></li>
+          <li><a class="nav-link scrollto" href="/#about">About</a></li>
           <li><a class="nav-link scrollto" href="/#menu">Menu</a></li>
           <li><a class="nav-link scrollto" href="/#specials">Specials</a></li>
           <li><a class="nav-link scrollto" href="/#events">Events</a></li>
@@ -74,8 +74,14 @@
                 {% else %}
                     <li><a href={% url 'logout_view' %}>Log out</a></li>
                 {% endif %}
-
             </ul>
+            {% if user_manager %}
+                <li class="dropdown"><a href="#"><span>Manager</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href={% url 'main_page:list_reservations' %}>List of reservations</a></li>
+                    </ul>
+                </li>
+            {% endif %}
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
@@ -87,7 +93,8 @@
     </div>
   </header><!-- End Header -->
 
- {% include 'slider.html' %}
+  {% include 'slider.html' %}
+
 
   <main id="main">
 
